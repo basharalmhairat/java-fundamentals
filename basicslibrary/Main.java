@@ -1,10 +1,5 @@
 package com.company;
-//import static sun.security.util.Debug.args;
-import java.util.Arrays;
-
-//import static sun.net.www.http.KeepAliveCache.result;
-
-
+import java.util.*;
 public class Main {
     public static boolean containsDuplicates(Integer[] arr) {
         for (int j = 0; j < arr.length; j++)
@@ -17,8 +12,7 @@ public class Main {
         for (int j = 0; j < arr.length; j++) {
             avg = arr[j]+avg;
         }
-      int  result=avg/ arr.length  ;
-        return result;
+        return avg/ arr.length;
     }
 
     public static int[] Role(int num) {
@@ -29,6 +23,55 @@ public class Main {
     Dice[x] = result;
         }
         return Dice;
+    }
+
+    public static String weeklyMonthTemperatures() {
+        Set<Integer> Temp = new HashSet<>();
+        int[][] Temperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}};
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 7; j++)
+         Temp.add(Temperatures[i][j]);
+
+        int High = Integer.MIN_VALUE;
+        int Low = Integer.MAX_VALUE;
+        for (int T : Temp) {
+            if (T > High)
+                High = T;
+            if (T < Low)
+                Low = T;
+        }
+        System.out.println("High: "+High);
+        System.out.println("Low: "+Low);
+        String x = "";
+        for (int i = Low; i <High ; i++)
+            if (!Temp.contains(i)) {
+                System.out.println("Never saw temperature:"+i);
+
+               x=  "Never saw temperature:"+i;}
+
+        return x;
+    }
+    public static String tally(List<String> votes) {
+
+        Map<String, Integer> io = new HashMap<String, Integer>();
+        for (String i : votes) {
+            Integer j = io.get(i);
+            io.put(i, (j == null) ? 1 : j + 1);
+        }
+
+        String x = "";
+
+        for (Map.Entry<String, Integer> val : io.entrySet()) {
+            System.out.println(val.getKey() + " " + "votes ==> " + val.getValue());
+        if (val.getValue() >2) {
+            x = val.getKey();
+        }
+        }
+        return x;
     }
         public static void main (String[]args) {
             System.out.println(Arrays.toString(Role(4)));
@@ -54,7 +97,7 @@ public class Main {
             for (int i = 0; i < 4; i++){
                 for (j = 0; j < 7; j++) {
 
-                    result1 = weeklyMonthTemperatures[i][j] + result1 / 7;
+                    result1 = weeklyMonthTemperatures[0][j] + result1 / 7;
                     result2 = weeklyMonthTemperatures[1][j] + result2 / 7;
                     result3 = weeklyMonthTemperatures[2][j] + result3 / 7;
                     result4 = weeklyMonthTemperatures[3][j] + result4 / 7;
@@ -70,6 +113,22 @@ public class Main {
 
                 }}
             System.out.println("the  lowest  average" + result2);
+            System.out.println("----------for-lape-3------------------------------------------");
+            System.out.println(weeklyMonthTemperatures());
+            System.out.println("-----------for-lape-3-----------------------------------------");
+
+            List<String> votes = new ArrayList<>();
+            votes.add("Bush");
+            votes.add("Bush");
+            votes.add("Bush");
+            votes.add("Shrub");
+            votes.add("Hedge");
+            votes.add("Shrub");
+            votes.add("Bush");
+            votes.add("Hedge");
+            votes.add("Bush");
+                String winner = tally(votes);
+            System.out.println(winner + " received the most votes!");
 
         }
 }
